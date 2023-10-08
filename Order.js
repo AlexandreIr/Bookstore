@@ -9,7 +9,15 @@ module.exports=class Order{
             }
         }),
         this.#items=items,
-        this.#user=user
+        this.#user=user,
+        this.#total=items.reduce((sum, {product, qtt})=>{(product.price*qtt)},0)
     }
 
+    get ord(){
+        return {
+            items: this.#items,
+            user: this.#user,
+            total: this.#total
+        }
+    }
 }
