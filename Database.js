@@ -3,6 +3,7 @@ module.exports=class Database{
         authors:[],
         books:[],
         magazines:[],
+        users:[],
         orders:[]
     }
     search(key){
@@ -43,7 +44,20 @@ module.exports=class Database{
         this.addMagazinetoStock(mag)
     }
 
+    saveUser(user){
+        const userExists=this.#storage.users.find(u=>user.email===u.email);
+        if(!userExists) this.#storage.users.push(user);
+    }
+
     saveOrder(order){
         this.#storage.orders.push(order);
+    }
+
+    get showStorage(){
+        console.table(this.#storage.authors);
+        console.table(this.#storage.books);
+        console.table(this.#storage.magazines);
+        console.table(this.#storage.users);
+        console.table(this.#storage.orders.map(order=>order.ord));
     }
 }
